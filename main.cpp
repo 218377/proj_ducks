@@ -1,139 +1,12 @@
-#include "cstdlib"
+#include <cstdlib>
 #include <cstdio>
 #include <iostream>
 
+#include "Duck.h"
+#include "Humans.h"
+#include "GM.h"
+
 using namespace std;
-class GM{
-private:
-	int day_counter;
-	int temp;
-	bool is_sunny;
-public:
-	GM(){
-		day_counter = 0;
-		temp = (rand() % 20 ) + 10;
-		if(((rand() % 2 ) + 0) == 1 )
-			is_sunny = true;
-		else
-			is_sunny = false;
-	}
-
-	void Report(){
-		cout << "Day :"<< day_counter << " Weather :" << temp << " *C ";
-		if (is_sunny == true)
-			cout << ", Sunny \n";
-		else
-			cout << ", Rainy \n";
-
-	}
-	void Add_day(){
-		day_counter ++;
-	}
-
-	void Set_weather(){
-		temp = (rand() % 20 ) + 10;
-		if(((rand() % 2 ) + 0) == 1 )
-			is_sunny = true;
-		else
-			is_sunny = false;
-
-	}
-
-	int Exp_temp(){return temp;}
-	bool Exp_weather(){return is_sunny;}
-
-};
-class Duck {
-private:
-	int hp;
-	int gender;
-	int hunger;
-	int charm;
-	int vitality;
-	int protection;
-	int social_relations;
-	bool is_live;
-public:
-	
-	Duck(){
-		hp = (rand() % 90 ) + 10;
-		gender = (rand() % 2 ) + 0;
-		hunger = (rand() % 30 ) + 50;
-		charm = (rand() % 100 ) + 0;
-		vitality = (rand() % 100 ) + 0;
-		protection = (rand() % 100 ) + 0;
-		social_relations = (rand() % 100) + 0;
-		is_live = true;
-	};
-	void Duck_status(){
-		cout << "HP :"<< hp << " Gender :" << gender << " Hunger : "<< hunger << " Charm :" << charm << " Vitality : "<< hp << " Protection :" << protection << " Social Relations: " << social_relations << "\n";
-	}
-	bool Is_live(){
-		return is_live;
-	}
-
-	int Hp(){
-		return hp;
-	}
-
-	int Hunger(){
-		return hunger;
-	}
-
-	int Get_food(){
-		hunger --;
-	}
-
-	void Hunger_inc(){
-		hunger++;
-	}
-
-	void Hp_dsc(){
-		if(hunger >= 80)
-			hp = hp - hunger/20;
-	}
-
-	void Dead(){
-		if(hp <= 0)
-			is_live = false;
-	}
-	int Gender(){return gender;}
-	int Vitality(){return vitality;}
-
-	bool Try_repro(int vit_0, int vit_1){
-		if(vit_0 > 50 && vit_1>50){
-			if(((rand() % 100) + 0) >= 50)
-				return true;
-			else
-				return false;
-		}
-		return false;
-	}
-
-
-
-};
-
-class Humans {
-private: 
-	int amount_of_food;
-public:
-	Humans(){
-		amount_of_food = (rand() % 99) + 1;
-	}
-
-	bool Is_feeding(bool weather){
-		if(weather == true)
-			return true;
-		else
-			return false;
-
-	}
-
-	int Feed_ducks(int temp){
-		return (amount_of_food * 3 / (temp) ) ;
-	}
-};
 
 int main(int argc, char const *argv[]){
 	srand( time( NULL ) );
@@ -177,7 +50,7 @@ int main(int argc, char const *argv[]){
 					};			
 				};
 				
-				ducks[hungerst_duck[1]]->Get_food();
+				ducks[hungerst_duck[1]]->eat();
 			};
 		};
 		delete human;
